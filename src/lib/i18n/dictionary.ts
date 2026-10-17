@@ -1,6 +1,6 @@
 export type Lang = "en" | "hi";
 
-export const serviceKeys = ["mutualFunds", "sip", "sif", "swp", "stp", "portfolioManagement", "nps", "bonds", "insurance"] as const;
+export const serviceKeys = ["mutualFunds", "sip", "sif", "swp", "stp", "etf", "portfolioManagement", "nps", "bonds", "insurance"] as const;
 export type ServiceKey = (typeof serviceKeys)[number];
 
 export const goalKeys = ["childEducation", "retirement", "home", "travel", "wealthCreation", "other"] as const;
@@ -20,7 +20,8 @@ export interface BenefitItem {
 export interface ApproachStep {
   number: string;
   title: string;
-  description: string;
+  /** Optional: a step without supplied copy shows its title only. */
+  description?: string;
 }
 
 export interface CalcFieldCopy {
@@ -95,6 +96,10 @@ export interface Dictionary {
       dialogLabel: string;
     };
   };
+  planning: {
+    heading: string;
+    items: BenefitItem[];
+  };
   whyChooseUs: {
     heading: string;
     statement: string;
@@ -102,13 +107,14 @@ export interface Dictionary {
   };
   about: {
     heading: string;
-    words: [string, string, string];
+    photoAlt: string;
     paragraphs: [string, string, string];
     timelineLabel: string;
     timeline: [string, string, string, string];
   };
   approach: {
     heading: string;
+    description: string;
     steps: ApproachStep[];
     flowCaption: string;
     footerLine: string;
@@ -305,7 +311,7 @@ export const en: Dictionary = {
       "At Deolikar Mutual Funds and Investment Services, we help individuals and families understand investment options and plan their investments according to their financial goals, investment horizon and requirements.",
     primaryCta: "Start Your Investment Journey",
     secondaryCta: "Explore Our Services",
-    freeConsult: "First Consultation Free",
+    freeConsult: "Call us to book your FREE consultation.",
     callNow: "Call Now",
     whatsappUs: "WhatsApp Us",
     visual: {
@@ -327,7 +333,7 @@ export const en: Dictionary = {
     personalised: "Personalised Service",
   },
   services: {
-    heading: "Our Key Services",
+    heading: "Our Investment Products",
     subheading: "Simple guidance for different investment and financial planning needs.",
     learnMore: "Learn More",
     items: [
@@ -335,55 +341,61 @@ export const en: Dictionary = {
         key: "mutualFunds",
         title: "Mutual Funds",
         description:
-          "Guidance and assistance for investing in Mutual Funds based on your financial goals, investment horizon and requirements.",
+          "Diversified investment solutions professionally managed according to the investment objective of each scheme.",
       },
       {
         key: "sip",
-        title: "SIP",
+        title: "SIP – Systematic Investment Plan",
         description:
-          "Systematic Investment Plan (SIP) allows you to invest a fixed amount regularly and can help develop a disciplined investment habit for long-term goals.",
+          "Invest a fixed amount regularly in mutual funds and build a disciplined approach toward long-term financial goals.",
       },
       {
         key: "sif",
-        title: "SIF",
+        title: "SIF – Specialized Investment Fund",
         description:
-          "Specialized Investment Funds (SIF) are investment products designed for eligible investors seeking specific investment strategies. We provide information and assistance regarding available SIF options.",
+          "Specialized investment solutions offering eligible investors access to specific investment strategies, subject to applicable regulations and eligibility requirements.",
       },
       {
         key: "swp",
-        title: "SWP",
+        title: "SWP – Systematic Withdrawal Plan",
         description:
-          "Systematic Withdrawal Plan (SWP) can help investors withdraw a predetermined amount from their investments at regular intervals, subject to the applicable scheme terms.",
+          "A facility that enables investors to withdraw a predetermined amount from their mutual fund investments at regular intervals.",
       },
       {
         key: "stp",
-        title: "STP",
+        title: "STP – Systematic Transfer Plan",
         description:
-          "Systematic Transfer Plan (STP) allows investors to transfer a predetermined amount from one investment option to another at regular intervals, subject to applicable scheme terms.",
+          "A facility that allows investors to systematically transfer investments from one mutual fund scheme to another, subject to applicable scheme terms.",
       },
       {
-        key: "portfolioManagement",
-        title: "Portfolio Management",
+        key: "etf",
+        title: "ETF – Exchange Traded Funds",
         description:
-          "Information and assistance regarding Portfolio Management Services for eligible investors, subject to applicable regulations and terms.",
-      },
-      {
-        key: "nps",
-        title: "NPS",
-        description:
-          "Information and assistance related to the National Pension System (NPS) for retirement planning.",
+          "Investment funds traded on stock exchanges that generally track an index, commodity, or other underlying asset.",
       },
       {
         key: "bonds",
         title: "Bonds",
         description:
-          "Information about available bond and fixed-income investment opportunities and their features.",
+          "Debt investment instruments that may provide interest income and diversification, subject to the issuer's terms and associated risks.",
+      },
+      {
+        key: "nps",
+        title: "NPS – National Pension System",
+        description:
+          "A long-term retirement-oriented investment option designed to help individuals build a retirement corpus.",
+      },
+      {
+        key: "portfolioManagement",
+        title: "PMS – Portfolio Management Services",
+        description:
+          "Professionally managed investment portfolios designed according to the investor's objectives and the applicable regulatory framework.",
       },
       {
         key: "insurance",
         title: "Insurance",
         description:
-          "Guidance on insurance solutions designed to support financial protection and risk management.",
+          "Protection solutions designed to help individuals and families manage specified financial risks and protect their financial security.",
       },
     ],
     modal: {
@@ -393,6 +405,56 @@ export const en: Dictionary = {
       next: "Next service",
       dialogLabel: "Service details",
     },
+  },
+  planning: {
+    heading: "Our Financial Planning Services",
+    items: [
+      {
+        title: "Financial Planning",
+        description:
+          "A structured process of understanding your financial position, goals, responsibilities, and investment requirements to create a suitable financial plan.",
+      },
+      {
+        title: "Goal-Based Investment Planning",
+        description:
+          "Planning investments around specific financial goals such as children's education, home purchase, wealth creation, and retirement.",
+      },
+      {
+        title: "Child Education & Future Planning",
+        description:
+          "Helping parents plan and invest systematically to build a corpus for their child's future education, professional courses, and other important financial milestones.",
+      },
+      {
+        title: "SIP Planning",
+        description:
+          "Helping you plan your SIP investments according to your financial goals, investment horizon, risk profile, and investment capacity.",
+      },
+      {
+        title: "Portfolio Review",
+        description:
+          "Reviewing your existing investments to understand their allocation, diversification, risks, and alignment with your financial goals.",
+      },
+      {
+        title: "Retirement Planning",
+        description:
+          "Helping you plan for your future financial requirements and work toward building an adequate retirement corpus.",
+      },
+      {
+        title: "Investment Guidance",
+        description:
+          "Helping you understand different investment options, their features, risks, costs, and suitability before making investment decisions.",
+      },
+      {
+        title: "Investment Review & Monitoring",
+        description:
+          "Periodic review of your investments and financial goals to help keep your investment strategy aligned with your changing requirements.",
+      },
+      {
+        title: "Wealth Creation Planning",
+        description:
+          "Developing a disciplined, long-term investment approach focused on building wealth through appropriate investment strategies and regular investing.",
+      },
+    ],
   },
   whyChooseUs: {
     heading: "Why Choose Us?",
@@ -426,7 +488,7 @@ export const en: Dictionary = {
   },
   about: {
     heading: "About Deolikar Mutual Funds",
-    words: ["Simple.", "Transparent.", "Disciplined."],
+    photoAlt: "Portrait photograph — Deolikar Mutual Funds and Investment Services",
     paragraphs: [
       "Deolikar Mutual Funds and Investment Services is focused on helping investors understand and organise their investments in a simple, transparent and disciplined manner.",
       "We believe that investing is not just about selecting an investment product. It is also about understanding your financial goals, investment horizon, risk profile and overall financial situation.",
@@ -437,6 +499,8 @@ export const en: Dictionary = {
   },
   approach: {
     heading: "Our Approach",
+    description:
+      "We believe that successful investing starts with understanding your goals and creating a disciplined investment plan suited to your individual requirements.",
     steps: [
       {
         number: "01",
@@ -458,8 +522,12 @@ export const en: Dictionary = {
         title: "Review",
         description: "We provide ongoing support and review.",
       },
+      {
+        number: "05",
+        title: "Progress",
+      },
     ],
-    flowCaption: "Understand → Plan → Invest → Review",
+    flowCaption: "Understand → Plan → Invest → Review → Progress",
     footerLine: "Your goals. Your requirements. Your financial journey.",
     stepLabel: "Step",
   },
@@ -570,8 +638,8 @@ export const en: Dictionary = {
   cta: {
     heading: "Start Your Investment Journey",
     text: "You don't need to wait for a large amount of money to start investing. A disciplined approach and regular investing can help you work towards your long-term financial goals.",
-    sipLine: "Book your SIP today and start your journey to millionaire.",
-    freeConsult: "First Consultation Free",
+    sipLine: "Start Your Journey to Becoming a Millionaire.",
+    freeConsult: "Call us to book your FREE consultation.",
     primary: "Let's Plan Your Financial Journey",
     secondary: "WhatsApp Us",
   },
@@ -609,6 +677,7 @@ export const en: Dictionary = {
         sif: "SIF",
         swp: "SWP",
         stp: "STP",
+        etf: "ETF",
         portfolioManagement: "Portfolio Management",
         nps: "NPS",
         bonds: "Bonds",
@@ -646,7 +715,7 @@ export const en: Dictionary = {
   disclaimerSection: {
     heading: "Important Disclaimer",
     paragraphs: [
-      "Mutual Fund investments are subject to market risks. Read all scheme-related documents carefully before investing.",
+      "Mutual fund investments are subject to market risks. Read all scheme-related documents carefully before investing.",
       "Past performance is not indicative of future returns.",
       "Investment decisions should be made after considering your investment objectives, risk appetite, investment horizon and financial circumstances.",
       "The information provided on this website is for general informational and educational purposes and should not be construed as a guarantee of returns or as a substitute for personalised financial advice.",
@@ -709,7 +778,7 @@ export const hi: Dictionary = {
       "देओलीकर म्यूचुअल फंड्स एंड इन्वेस्टमेंट सर्विसेज में, हम व्यक्तियों और परिवारों को निवेश विकल्पों को समझने और उनके वित्तीय लक्ष्यों, निवेश अवधि तथा आवश्यकताओं के अनुसार अपने निवेश की योजना बनाने में मदद करते हैं।",
     primaryCta: "अपनी निवेश यात्रा शुरू करें",
     secondaryCta: "हमारी सेवाएं देखें",
-    freeConsult: "पहला परामर्श निःशुल्क",
+    freeConsult: "अपना निःशुल्क परामर्श बुक करने के लिए हमें कॉल करें।",
     callNow: "अभी कॉल करें",
     whatsappUs: "व्हाट्सएप करें",
     visual: {
@@ -731,7 +800,7 @@ export const hi: Dictionary = {
     personalised: "व्यक्तिगत सेवा",
   },
   services: {
-    heading: "हमारी प्रमुख सेवाएं",
+    heading: "हमारे निवेश उत्पाद",
     subheading: "विभिन्न निवेश और वित्तीय नियोजन आवश्यकताओं के लिए सरल मार्गदर्शन।",
     learnMore: "और जानें",
     items: [
@@ -739,52 +808,61 @@ export const hi: Dictionary = {
         key: "mutualFunds",
         title: "म्यूचुअल फंड्स",
         description:
-          "आपके वित्तीय लक्ष्यों, निवेश अवधि और आवश्यकताओं के आधार पर म्यूचुअल फंड में निवेश हेतु मार्गदर्शन एवं सहायता।",
+          "प्रत्येक योजना के निवेश उद्देश्य के अनुसार पेशेवर रूप से प्रबंधित विविधीकृत निवेश समाधान।",
       },
       {
         key: "sip",
-        title: "SIP",
+        title: "SIP – सिस्टमैटिक इन्वेस्टमेंट प्लान",
         description:
-          "सिस्टमैटिक इन्वेस्टमेंट प्लान (SIP) के माध्यम से आप नियमित रूप से एक निश्चित राशि निवेश कर सकते हैं, जो दीर्घकालिक लक्ष्यों के लिए अनुशासित निवेश आदत विकसित करने में मदद कर सकता है।",
+          "म्यूचुअल फंड में नियमित रूप से एक निश्चित राशि निवेश करें और दीर्घकालिक वित्तीय लक्ष्यों की ओर एक अनुशासित दृष्टिकोण विकसित करें।",
       },
       {
         key: "sif",
-        title: "SIF",
+        title: "SIF – स्पेशलाइज्ड इन्वेस्टमेंट फंड",
         description:
-          "स्पेशलाइज्ड इन्वेस्टमेंट फंड्स (SIF) विशिष्ट निवेश रणनीतियां चाहने वाले पात्र निवेशकों के लिए तैयार किए गए निवेश उत्पाद हैं। हम उपलब्ध SIF विकल्पों के बारे में जानकारी और सहायता प्रदान करते हैं।",
+          "विशिष्ट निवेश समाधान, जो लागू नियमों और पात्रता शर्तों के अधीन, पात्र निवेशकों को विशिष्ट निवेश रणनीतियों तक पहुंच प्रदान करते हैं।",
       },
       {
         key: "swp",
-        title: "SWP",
+        title: "SWP – सिस्टमैटिक विड्रॉल प्लान",
         description:
-          "सिस्टमैटिक विड्रॉल प्लान (SWP) निवेशकों को लागू योजना नियमों के अधीन, नियमित अंतराल पर अपने निवेश से एक निश्चित राशि निकालने में मदद कर सकता है।",
+          "एक सुविधा, जो निवेशकों को नियमित अंतराल पर अपने म्यूचुअल फंड निवेश से एक पूर्व-निर्धारित राशि निकालने में सक्षम बनाती है।",
       },
       {
         key: "stp",
-        title: "STP",
+        title: "STP – सिस्टमैटिक ट्रांसफर प्लान",
         description:
-          "सिस्टमैटिक ट्रांसफर प्लान (STP) निवेशकों को लागू नियमों के अधीन, एक निश्चित राशि को नियमित अंतराल पर एक निवेश विकल्प से दूसरे में स्थानांतरित करने की सुविधा देता है।",
+          "एक सुविधा, जो निवेशकों को लागू योजना शर्तों के अधीन, एक म्यूचुअल फंड योजना से दूसरी योजना में व्यवस्थित रूप से निवेश स्थानांतरित करने की अनुमति देती है।",
       },
       {
-        key: "portfolioManagement",
-        title: "पोर्टफोलियो मैनेजमेंट",
+        key: "etf",
+        title: "ETF – एक्सचेंज ट्रेडेड फंड्स",
         description:
-          "पात्र निवेशकों के लिए पोर्टफोलियो मैनेजमेंट सर्विसेज के बारे में जानकारी और सहायता, लागू नियमों और शर्तों के अधीन।",
-      },
-      {
-        key: "nps",
-        title: "NPS",
-        description: "सेवानिवृत्ति योजना हेतु नेशनल पेंशन सिस्टम (NPS) से संबंधित जानकारी और सहायता।",
+          "स्टॉक एक्सचेंज पर ट्रेड होने वाले निवेश फंड, जो सामान्यतः किसी सूचकांक, कमोडिटी या अन्य अंतर्निहित परिसंपत्ति को ट्रैक करते हैं।",
       },
       {
         key: "bonds",
         title: "बॉन्ड्स",
-        description: "उपलब्ध बॉन्ड और फिक्स्ड-इनकम निवेश अवसरों तथा उनकी विशेषताओं के बारे में जानकारी।",
+        description:
+          "ऋण निवेश साधन, जो जारीकर्ता की शर्तों और संबंधित जोखिमों के अधीन, ब्याज आय और विविधीकरण प्रदान कर सकते हैं।",
+      },
+      {
+        key: "nps",
+        title: "NPS – नेशनल पेंशन सिस्टम",
+        description:
+          "एक दीर्घकालिक, सेवानिवृत्ति-केंद्रित निवेश विकल्प, जो व्यक्तियों को सेवानिवृत्ति कोष बनाने में मदद करने के लिए तैयार किया गया है।",
+      },
+      {
+        key: "portfolioManagement",
+        title: "PMS – पोर्टफोलियो मैनेजमेंट सर्विसेज",
+        description:
+          "निवेशक के उद्देश्यों और लागू नियामक ढांचे के अनुसार तैयार किए गए, पेशेवर रूप से प्रबंधित निवेश पोर्टफोलियो।",
       },
       {
         key: "insurance",
         title: "बीमा",
-        description: "वित्तीय सुरक्षा और जोखिम प्रबंधन में सहायक बीमा समाधानों पर मार्गदर्शन।",
+        description:
+          "सुरक्षा समाधान, जो व्यक्तियों और परिवारों को निर्दिष्ट वित्तीय जोखिमों का प्रबंधन करने और उनकी वित्तीय सुरक्षा बनाए रखने में मदद करने के लिए तैयार किए गए हैं।",
       },
     ],
     modal: {
@@ -794,6 +872,56 @@ export const hi: Dictionary = {
       next: "अगली सेवा",
       dialogLabel: "सेवा का विवरण",
     },
+  },
+  planning: {
+    heading: "हमारी वित्तीय नियोजन सेवाएं",
+    items: [
+      {
+        title: "वित्तीय नियोजन",
+        description:
+          "आपकी वित्तीय स्थिति, लक्ष्यों, जिम्मेदारियों और निवेश आवश्यकताओं को समझकर एक उपयुक्त वित्तीय योजना बनाने की एक व्यवस्थित प्रक्रिया।",
+      },
+      {
+        title: "लक्ष्य-आधारित निवेश योजना",
+        description:
+          "बच्चों की शिक्षा, घर की खरीद, संपत्ति निर्माण और सेवानिवृत्ति जैसे विशिष्ट वित्तीय लक्ष्यों के अनुसार निवेश की योजना बनाना।",
+      },
+      {
+        title: "बच्चों की शिक्षा एवं भविष्य योजना",
+        description:
+          "माता-पिता को अपने बच्चे की भविष्य की शिक्षा, व्यावसायिक पाठ्यक्रमों और अन्य महत्वपूर्ण वित्तीय पड़ावों के लिए कोष बनाने हेतु व्यवस्थित रूप से योजना बनाने और निवेश करने में मदद।",
+      },
+      {
+        title: "SIP योजना",
+        description:
+          "आपके वित्तीय लक्ष्यों, निवेश अवधि, जोखिम प्रोफ़ाइल और निवेश क्षमता के अनुसार आपके SIP निवेश की योजना बनाने में मदद।",
+      },
+      {
+        title: "पोर्टफोलियो समीक्षा",
+        description:
+          "आपके मौजूदा निवेशों के आवंटन, विविधीकरण, जोखिमों और आपके वित्तीय लक्ष्यों के साथ उनके तालमेल को समझने के लिए उनकी समीक्षा।",
+      },
+      {
+        title: "सेवानिवृत्ति योजना",
+        description:
+          "आपकी भविष्य की वित्तीय आवश्यकताओं की योजना बनाने और पर्याप्त सेवानिवृत्ति कोष बनाने की दिशा में काम करने में मदद।",
+      },
+      {
+        title: "निवेश मार्गदर्शन",
+        description:
+          "निवेश निर्णय लेने से पहले विभिन्न निवेश विकल्पों, उनकी विशेषताओं, जोखिमों, लागतों और उपयुक्तता को समझने में मदद।",
+      },
+      {
+        title: "निवेश समीक्षा एवं निगरानी",
+        description:
+          "आपकी बदलती आवश्यकताओं के अनुरूप आपकी निवेश रणनीति बनाए रखने में मदद के लिए आपके निवेशों और वित्तीय लक्ष्यों की आवधिक समीक्षा।",
+      },
+      {
+        title: "संपत्ति निर्माण योजना",
+        description:
+          "उपयुक्त निवेश रणनीतियों और नियमित निवेश के माध्यम से संपत्ति निर्माण पर केंद्रित, एक अनुशासित और दीर्घकालिक निवेश दृष्टिकोण विकसित करना।",
+      },
+    ],
   },
   whyChooseUs: {
     heading: "हमें क्यों चुनें?",
@@ -827,7 +955,7 @@ export const hi: Dictionary = {
   },
   about: {
     heading: "देओलीकर म्यूचुअल फंड्स के बारे में",
-    words: ["सरल।", "पारदर्शी।", "अनुशासित।"],
+    photoAlt: "पोर्ट्रेट फ़ोटो — देओलीकर म्यूचुअल फंड्स एंड इन्वेस्टमेंट सर्विसेज",
     paragraphs: [
       "देओलीकर म्यूचुअल फंड्स एंड इन्वेस्टमेंट सर्विसेज का उद्देश्य निवेशकों को उनके निवेश को सरल, पारदर्शी और अनुशासित तरीके से समझने और व्यवस्थित करने में मदद करना है।",
       "हमारा मानना है कि निवेश केवल एक निवेश उत्पाद चुनने तक सीमित नहीं है। यह आपके वित्तीय लक्ष्यों, निवेश अवधि, जोखिम प्रोफ़ाइल और समग्र वित्तीय स्थिति को समझने के बारे में भी है।",
@@ -838,6 +966,8 @@ export const hi: Dictionary = {
   },
   approach: {
     heading: "हमारा दृष्टिकोण",
+    description:
+      "हमारा मानना है कि सफल निवेश की शुरुआत आपके लक्ष्यों को समझने और आपकी व्यक्तिगत आवश्यकताओं के अनुरूप एक अनुशासित निवेश योजना बनाने से होती है।",
     steps: [
       {
         number: "01",
@@ -859,8 +989,12 @@ export const hi: Dictionary = {
         title: "समीक्षा",
         description: "हम निरंतर सहायता और समीक्षा प्रदान करते हैं।",
       },
+      {
+        number: "05",
+        title: "प्रगति",
+      },
     ],
-    flowCaption: "समझना → योजना → निवेश → समीक्षा",
+    flowCaption: "समझना → योजना → निवेश → समीक्षा → प्रगति",
     footerLine: "आपके लक्ष्य। आपकी आवश्यकताएं। आपकी वित्तीय यात्रा।",
     stepLabel: "चरण",
   },
@@ -971,8 +1105,8 @@ export const hi: Dictionary = {
   cta: {
     heading: "अपनी निवेश यात्रा शुरू करें",
     text: "निवेश शुरू करने के लिए आपको बड़ी रकम का इंतज़ार करने की आवश्यकता नहीं है। अनुशासित दृष्टिकोण और नियमित निवेश आपको अपने दीर्घकालिक वित्तीय लक्ष्यों की दिशा में आगे बढ़ने में मदद कर सकते हैं।",
-    sipLine: "आज ही SIP बुक करें और मिलियनेयर बनने की अपनी यात्रा शुरू करें।",
-    freeConsult: "पहला परामर्श निःशुल्क",
+    sipLine: "मिलियनेयर बनने की अपनी यात्रा शुरू करें।",
+    freeConsult: "अपना निःशुल्क परामर्श बुक करने के लिए हमें कॉल करें।",
     primary: "आइए आपकी वित्तीय यात्रा की योजना बनाएं",
     secondary: "व्हाट्सएप करें",
   },
@@ -1010,6 +1144,7 @@ export const hi: Dictionary = {
         sif: "SIF",
         swp: "SWP",
         stp: "STP",
+        etf: "ETF",
         portfolioManagement: "पोर्टफोलियो मैनेजमेंट",
         nps: "NPS",
         bonds: "बॉन्ड्स",

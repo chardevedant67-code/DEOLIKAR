@@ -86,6 +86,17 @@ export function TransferIcon({ className }: IconProps) {
   );
 }
 
+/** ETF: an exchange screen tracking an index. */
+export function ExchangeIcon({ className }: IconProps) {
+  return (
+    <Svg className={className}>
+      <rect x="6" y="8" width="36" height="26" rx="4" />
+      <path d="M18 42h12M24 34v8" />
+      <path d="m12 27 6-6 5 4 6-8 7 5" style={accent} />
+    </Svg>
+  );
+}
+
 /** Insurance: a shield with a check. */
 export function ShieldIcon({ className }: IconProps) {
   return (
@@ -137,6 +148,7 @@ const ICONS: Record<ServiceKey, (props: IconProps) => React.ReactElement> = {
   sif: SifIcon,
   swp: WithdrawalIcon,
   stp: TransferIcon,
+  etf: ExchangeIcon,
   portfolioManagement: BriefcaseIcon,
   insurance: ShieldIcon,
   nps: SunriseIcon,

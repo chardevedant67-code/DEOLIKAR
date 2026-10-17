@@ -9,6 +9,7 @@ import { GoalPlanner } from "@/components/GoalPlanner";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { JourneyRail } from "@/components/JourneyRail";
+import { PlanningServices } from "@/components/PlanningServices";
 import { Questions } from "@/components/Questions";
 import { ScrollProgress } from "@/components/ScrollProgress";
 import { Services } from "@/components/Services";
@@ -30,6 +31,7 @@ export default function Home() {
         <Hero />
         <TrustBar />
         <Services />
+        <PlanningServices />
         <WhyChooseUs />
         <About />
         <FinancialJourney />

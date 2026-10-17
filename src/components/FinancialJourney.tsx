@@ -26,7 +26,7 @@ export function FinancialJourney() {
       <div aria-hidden className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-mint-500/10 blur-[110px]" />
 
       <div className="container-page relative">
-        <SectionHeading id="approach-heading" eyebrow={t.nav.approach} heading={a.heading} tone="dark" />
+        <SectionHeading id="approach-heading" eyebrow={t.nav.approach} heading={a.heading} subheading={a.description} tone="dark" />
 
         <Reveal delay={100}>
           <p className="mt-6 flex flex-wrap items-center gap-x-3 gap-y-1 font-display text-lg font-semibold text-royal-200 sm:text-xl">
@@ -41,28 +41,28 @@ export function FinancialJourney() {
         </Reveal>
 
         <div ref={rootRef} className="journey-root relative mt-14 lg:mt-20">
-          <ol className="relative grid gap-5 lg:grid-cols-4 lg:gap-6">
+          <ol className="relative grid gap-5 lg:grid-cols-5 lg:gap-6">
             {/* track */}
             <span
               aria-hidden
-              className="absolute bottom-6 left-[1.05rem] top-6 w-px bg-white/15 lg:bottom-auto lg:left-[12.5%] lg:right-[12.5%] lg:top-[1.05rem] lg:h-px lg:w-auto"
+              className="absolute bottom-6 left-[1.05rem] top-6 w-px bg-white/15 lg:bottom-auto lg:left-[10%] lg:right-[10%] lg:top-[1.05rem] lg:h-px lg:w-auto"
             />
             <span
               aria-hidden
-              className="journey-fill absolute bottom-6 left-[1.05rem] top-6 w-px bg-gradient-to-b from-royal-400 to-mint-400 lg:bottom-auto lg:left-[12.5%] lg:right-[12.5%] lg:top-[1.05rem] lg:h-px lg:w-auto lg:bg-gradient-to-r"
+              className="journey-fill absolute bottom-6 left-[1.05rem] top-6 w-px bg-gradient-to-b from-royal-400 to-mint-400 lg:bottom-auto lg:left-[10%] lg:right-[10%] lg:top-[1.05rem] lg:h-px lg:w-auto lg:bg-gradient-to-r"
             />
 
             {a.steps.map((step, i) => (
               <li
                 key={step.number}
                 className="journey-node relative pl-14 lg:pl-0 lg:pt-16"
-                style={{ "--at": (0.04 + 0.82 * (i / 3)).toFixed(3) } as React.CSSProperties}
+                style={{ "--at": (0.04 + 0.82 * (i / (a.steps.length - 1))).toFixed(3) } as React.CSSProperties}
               >
                 <span
                   aria-hidden
                   className="journey-dot absolute left-0 top-0 z-10 h-[2.1rem] w-[2.1rem] rounded-full border-4 border-navy-950 lg:left-1/2 lg:-translate-x-1/2"
                 />
-                <div className="journey-card group relative h-full overflow-hidden rounded-[1.75rem] border bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-6 backdrop-blur transition-colors duration-300 hover:from-white/[0.14] sm:p-7">
+                <div className="journey-card group relative h-full overflow-hidden rounded-[1.75rem] border bg-gradient-to-b from-white/[0.09] to-white/[0.03] p-6 backdrop-blur transition-colors duration-300 hover:from-white/[0.14] sm:p-7 lg:p-5 xl:p-7">
                   <span
                     aria-hidden
                     className="tabular pointer-events-none absolute -right-2 -top-4 font-display text-[7rem] font-extrabold leading-none text-white/[0.06]"
@@ -72,8 +72,10 @@ export function FinancialJourney() {
                   <p className="tracking-caps relative text-[11px] font-semibold text-royal-300">
                     {a.stepLabel} {step.number}
                   </p>
-                  <h3 className="relative mt-3 font-display text-[1.7rem] font-extrabold tracking-tight text-white">{step.title}</h3>
-                  <p className="relative mt-3 text-[15px] leading-relaxed text-white/70">{step.description}</p>
+                  <h3 className="relative mt-3 font-display text-[1.7rem] font-extrabold tracking-tight text-white lg:text-[1.4rem] xl:text-[1.7rem]">{step.title}</h3>
+                  {step.description ? (
+                    <p className="relative mt-3 text-[15px] leading-relaxed text-white/70">{step.description}</p>
+                  ) : null}
                 </div>
               </li>
             ))}

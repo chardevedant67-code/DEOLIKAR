@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { useScrollProgress } from "@/lib/hooks";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
@@ -27,22 +28,17 @@ export function About() {
           </Reveal>
 
           <Reveal delay={120} className="mt-10 lg:mt-14">
-            <p className="display text-[clamp(2.6rem,1.6rem+4.4vw,4.6rem)]">
-              {a.words.map((word, i) => (
-                <span
-                  key={word}
-                  className={`block ${
-                    i === 0
-                      ? "text-navy-950"
-                      : i === 1
-                        ? "bg-gradient-to-r from-royal-600 to-royal-400 bg-clip-text text-transparent"
-                        : "text-navy-950/50"
-                  }`}
-                >
-                  {word}
-                </span>
-              ))}
-            </p>
+            {/* Supplied portrait, shown at its original proportions (1024 × 1143). */}
+            <div className="max-w-sm overflow-hidden rounded-[1.75rem] border border-mist-200 bg-mist-50 shadow-soft">
+              <Image
+                src="/about/portrait.png"
+                alt={a.photoAlt}
+                width={1024}
+                height={1143}
+                sizes="(min-width: 640px) 384px, calc(100vw - 2.5rem)"
+                className="block h-auto w-full"
+              />
+            </div>
           </Reveal>
         </div>
 
